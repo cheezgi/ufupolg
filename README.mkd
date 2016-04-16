@@ -114,7 +114,7 @@ This allows for blocks to be put inside the `do` part.
     "count" : "count" + 1
     pr["count"]
     {[["count"]=[10]][
-        "bool" = false
+        "bool" : false
     ]}
 ]
 
