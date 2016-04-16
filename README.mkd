@@ -25,24 +25,19 @@ pr[2 + [3 - [6 - 2]]]
 
 #### Comments
 
-Comments are one of the most useful features in a programming language.
-They should be used to add information to a program's source code in a way
-that a person could open the code and know what's going on, but also not
-give so much information to the point of redundancy.
+Comments are pretty self-explanatory and explanatory:
 
 `=+ This is a comment, and they are between these symbols. +=`
 
 #### Text literals
 
-A way to represent text is an integral part of any usable programming
-language. The art of text manipulation is one of the most interesting
-brain teasers ever created. see regexes.  
+One of the most useful parts of a programming language.
+
 `&This a string, encapsulated between ampersands.&`
 
 #### Variables
 
-Data manipulation is the most important function in computing, so it
-should go without saying that a way to represent changeable data is ingegral.
+Always mutable, possible static types may be added later.
 
 `"spaces are allowed" : 3`
 
@@ -75,8 +70,8 @@ The syntax of a funtion is as follows:
 
 ```
 "function name (spaces allowed)" :=: "arguments" :
-    body
-    re[return this thing]
+    =+ body +=
+    re["arguments"]
 | =+ end funtion +=
 ```
 
@@ -90,8 +85,8 @@ To call this function, use the `.` operator:
 #### If
 
 ```
-"f" :=: pr[&one and two are equal&] |
-"z" :=: pr[&one and two are not equal&] |
+"f" :=: : pr[&one and two are equal&] |
+"z" :=: :  pr[&one and two are not equal&] |
 "one" : 1
 "two" : 1
 {[["one"]=["two"]]["f".]["z".]}
@@ -101,7 +96,26 @@ The syntax of an if statement is like so in pseudocode:
 
 `{[if this expression is true][do this][optional: otherwise, do this]}`
 
-This allows for blocks to be put inside the `do` part.
+This allows for blocks to be put inside the `do` part:
+
+```
+"celebration" :=: : pr[&Hey, nice one!&] |
+"loser" :=: "realnum" : pr[&Wow, what a loser. It was actually #"realnum"#&]
+pr[&Guess the number!&]
+"number" : 4 =+ Guaranteed random dice roll +=
+"input" : in
+{ [["input"]["number"]]
+    [
+        "loser" . "number"
+    ]
+    [
+        "celebration" .
+    ]
+}
+```
+
+Note the use of interpolation using `#`: the syntax of this may change, or may
+be replaced with a concatenation operator.
 
 #### Loops
 
@@ -113,9 +127,11 @@ This allows for blocks to be put inside the `do` part.
 "bool"_[
     "count" : "count" + 1
     pr["count"]
-    {[["count"]=[10]][
-        "bool" : false
-    ]}
+    { [["count"]=[10]]
+        [
+            "bool" : false
+        ]
+    }
 ]
 
 ```
@@ -125,3 +141,7 @@ by the left expression amount of times. In the examples above, we have a
 simple loop where the expression is repeated only three times. In the second
 example, we have a `while` loop, that is, it repeats as long as `"bool"` is
 `true`.
+
+## "ew"
+
+If you haven't said that yet, you're probably a perl programmer. I pity your eyes.
