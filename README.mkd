@@ -18,7 +18,7 @@ innermost are evaluated before the outermost, eventually working its way
 out to the final value of the expression.
 
 ```
-pr[2 + [3 - [6 - 2]]]
+pr[2 + [3 - [6 - 2]]];
 ```
 
 `1`
@@ -39,9 +39,9 @@ One of the most useful parts of a programming language.
 
 Always mutable, possible static types may be added later.
 
-`"spaces are allowed" : 3`
+`"spaces are allowed" : 3;`
 
-`"in variable names" : &Hello, world!&`
+`"in variable names" : &Hello, world!&;`
 
 ### Control flow
 
@@ -53,17 +53,17 @@ several different ways to implement control flow:
 
 ```
 "say hello to everyone" :=: :
-    pr[&Hello, world!&]
-    pr[&This is an examle function.&]
+    pr[&Hello, world!&];
+    pr[&This is an example function.&];
 |
 
-"say hello to everyone" .
+"say hello to everyone" . ;
 
 "function" :=: "arg1" "arg2" :
-    re["arg1" + "arg2"]
+    re["arg1" + "arg2"];
 |
 
-"result" : "function" . 2 3
+"result" : "function" . 2 3;
 ```
 
 The syntax of a funtion is as follows:
@@ -71,45 +71,58 @@ The syntax of a funtion is as follows:
 ```
 "function name (spaces allowed)" :=: "arguments" :
     =+ body +=
-    re["arguments"]
+    re["arguments"];
 | =+ end funtion +=
 ```
 
 To call this function, use the `.` operator:
 
 ```
-"f" :=: : pr[&Hello, world!&] |
-"f" .
+"f" :=: : pr[&Hello, world!&]; |
+"f" . ;
 ```
 
 #### If
 
 ```
-"f" :=: : pr[&one and two are equal&] |
-"z" :=: :  pr[&one and two are not equal&] |
-"one" : 1
-"two" : 1
-{[["one"]=["two"]]["f".]["z".]}
+"f" :=: : pr[&one and two are equal&]; |
+"z" :=: :  pr[&one and two are not equal&]; |
+"one" : 1;
+"two" : 1;
+{ [["one"]=["two"]]
+    [
+        "f" . ;
+    ][
+        "z" . ;
+    ]
+}
 ```
 
-The syntax of an if statement is like so in pseudocode:
+Put simply, the syntax of an if statement is like so in pseudocode:
 
 `{[if this expression is true][do this][optional: otherwise, do this]}`
+
+Truthiness and falsiness is relatively simple:
+
+| True | False |
+| ---- | ----- |
+| !0   | 0     |
+| true | false |
+| !&&  | &&    |
 
 This allows for blocks to be put inside the `do` part:
 
 ```
-"celebration" :=: : pr[&Hey, nice one!&] |
-"loser" :=: "realnum" : pr[&Wow, what a loser. It was actually #"realnum"#&]
-pr[&Guess the number!&]
-"number" : 4 =+ Guaranteed random dice roll +=
-"input" : in
+"celebration" :=: : pr[&Hey, nice one!&]; |
+"loser" :=: "realnum" : pr[&Wow, what a loser. It was actually #"realnum"#&]; |
+pr[&Guess the number!&];
+"number" : 4; =+ Guaranteed random dice roll +=
+"input" : in;
 { [["input"]["number"]]
     [
-        "loser" . "number"
-    ]
-    [
-        "celebration" .
+        "loser" . "number";
+    ][
+        "celebration" . ;
     ]
 }
 ```
@@ -122,14 +135,14 @@ be replaced with a concatenation operator.
 ```
 3_[pr[&Three times&]]
 
-"bool" : true
-"count" : 0
+"bool" : true;
+"count" : 0;
 "bool"_[
-    "count" : "count" + 1
-    pr["count"]
+    "count" : "count" + 1;
+    pr["count"];
     { [["count"]=[10]]
         [
-            "bool" : false
+            "bool" : false;
         ]
     }
 ]
@@ -142,6 +155,27 @@ simple loop where the expression is repeated only three times. In the second
 example, we have a `while` loop, that is, it repeats as long as `"bool"` is
 `true`.
 
-## "ew"
+### "ew"
 
 If you haven't said that yet, you're probably a perl programmer. I pity your eyes.
+
+## Style
+
+As you can see, this is one *ugly* programming language. There is no style, in fact,
+ugly code is celebrated.
+
+```
+=+ right-justified fibonacci sequence +=
+ "fibonacci" :=: "num" :
+            "a" : 0;
+            "b" : 1;
+          "tmp" : 0;
+             "num"_[
+    "tmp" : "b";
+"b" : "a" + "b";
+    "a" : "tmp";
+        pr["a"];
+                   ]
+                       |
+"fibonacci" . in
+```
