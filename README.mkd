@@ -1,0 +1,127 @@
+# Ufupolg programming language
+
+*This is kind of an esoteric programming language.
+The goal is to be as ugly as possible.*
+
+## There is no god
+
+Ufupolg stands for "ugly functional/f\*cking programming language".
+As stated above, the purpose of this language is to be unpleasant to use.
+I think that you will find that it achieves this purpose very easily.
+
+### Simple stuff
+
+#### Expressions
+
+Expressions are a very simle concept. In a nested set of expressions, the
+innermost are evaluated before the outermost, eventually working its way
+out to the final value of the expression.
+
+```
+pr[2 + [3 - [6 - 2]]]
+```
+
+`1`
+
+#### Comments
+
+Comments are one of the most useful features in a programming language.
+They should be used to add information to a program's source code in a way
+that a person could open the code and know what's going on, but also not
+give so much information to the point of redundancy.
+
+`=+ This is a comment, and they are between these symbols. +=`
+
+#### Text literals
+
+A way to represent text is an integral part of any usable programming
+language. The art of text manipulation is one of the most interesting
+brain teasers ever created. see regexes.  
+`&This a string, encapsulated between ampersands.&`
+
+#### Variables
+
+Data manipulation is the most important function in computing, so it
+should go without saying that a way to represent changeable data is ingegral.
+
+`"spaces are allowed" : 3`
+
+`"in variable names" : &Hello, world!&`
+
+### Control flow
+
+Control flow is another important feature in programming, but some are
+greater than others. `goto` is an abomination, `for` is a godsend. There are
+several different ways to implement control flow:
+
+#### Functions
+
+```
+"say hello to everyone" :=: :
+    pr[&Hello, world!&]
+    pr[&This is an examle function.&]
+|
+
+"say hello to everyone" .
+
+"function" :=: "arg1" "arg2" :
+    re["arg1" + "arg2"]
+|
+
+"result" : "function" . 2 3
+```
+
+The syntax of a funtion is as follows:
+
+```
+"function name (spaces allowed)" :=: "arguments" :
+    body
+    re[return this thing]
+| =+ end funtion +=
+```
+
+To call this function, use the `.` operator:
+
+```
+"f" :=: : pr[&Hello, world!&] |
+"f" .
+```
+
+#### If
+
+```
+"f" :=: pr[&one and two are equal&] |
+"z" :=: pr[&one and two are not equal&] |
+"one" : 1
+"two" : 1
+{[["one"]=["two"]]["f".]["z".]}
+```
+
+The syntax of an if statement is like so in pseudocode:
+
+`{[if this expression is true][do this][optional: otherwise, do this]}`
+
+This allows for blocks to be put inside the `do` part.
+
+#### Loops
+
+```
+3_[pr[&Three times&]]
+
+"bool" : true
+"count" : 0
+"bool"_[
+    "count" : "count" + 1
+    pr["count"]
+    {[["count"]=[10]][
+        "bool" = false
+    ]}
+]
+
+```
+
+Loops are represented using the `_` operator. It loops the right expresson
+by the left expression amount of times. In the examples above, we have a
+simple loop where the expression is repeated only three times. In the second
+example, we have a `while` loop, that is, it repeats as long as `"bool"` is
+`true`.
