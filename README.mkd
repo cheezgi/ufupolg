@@ -177,5 +177,5 @@ ugly code is celebrated.
         pr["a"];
                    ]
                        |
-"fibonacci" . in
+       "fibonacci" . in;
 ```
